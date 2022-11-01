@@ -1,0 +1,10 @@
+EVALUATE
+FILTER
+(
+	ADDCOLUMNS
+	(
+		Route_OccupancyRate, 
+		"time remain (minutes)" , Route_OccupancyRate[ID_Time_RouteDepart] - HOUR(NOW())*60 - MINUTE(Now())),
+	Route_OccupancyRate[ID_Route] = 125
+)
+

@@ -1,0 +1,11 @@
+DEFINE 
+	MEASURE Subroute_RemainTicket[count tickets] = COUNT(Tickets[ID_Ticket])
+EVALUATE 
+SUMMARIZECOLUMNS
+(
+	Routes[ID_R_surrogate],
+	Routes[Departure_Hub_EndName],
+	'Date'[Date],
+	FILTER(Routes, Routes[Departure_Hub_EndName]="Kołobrzeg - Olsztyn Główny - Białogard"),
+	"ticket sold", [count tickets]
+)

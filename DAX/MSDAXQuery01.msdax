@@ -1,0 +1,11 @@
+DEFINE 
+	MEASURE Subroute_RemainTicket[count tickets] = MAX(Subroute_RemainTicket[Ticket_PassThrough])
+EVALUATE
+SUMMARIZECOLUMNS
+(
+	Subroutes[ID_SR],
+	Routes[ID_R_surrogate],
+	FILTER('Subroutes', Subroutes[ID_R] = 111),
+	"Tickets sold", [count tickets]
+)
+ORDER BY 'Subroutes'[ID_SR]

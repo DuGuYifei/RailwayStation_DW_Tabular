@@ -1,0 +1,8 @@
+DEFINE 
+	MEASURE Route_OccupancyRate[avg occupancy rate]=AVERAGE(Route_OccupancyRate[Occupancy])
+EVALUATE
+SUMMARIZECOLUMNS
+(
+	Trains[TrainClass],
+	"avg occupancy rate", Route_OccupancyRate[avg occupancy rate]
+)

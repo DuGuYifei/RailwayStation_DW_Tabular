@@ -1,0 +1,10 @@
+DEFINE
+	MEASURE Subroute_RemainTicket[Maximum ticket pass through] = MAX(Subroute_RemainTicket[Ticket_PassThrough])
+	MEASURE Route_OccupancyRate[Seat num] = MAX(Route_OccupancyRate[Amount_Seat])
+	MEASURE Subroute_RemainTicket[Remain ticket] = Route_OccupancyRate[Seat num] - Subroute_RemainTicket[Maximum ticket pass through] 
+EVALUATE
+SUMMARIZECOLUMNS
+(
+	FILTER(Subroutes, Subroutes[ID_R]=123),
+	"remain ticket", Subroute_RemainTicket[Remain ticket]
+)

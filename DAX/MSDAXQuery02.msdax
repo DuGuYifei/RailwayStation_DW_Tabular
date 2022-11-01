@@ -1,0 +1,39 @@
+DEFINE 
+	MEASURE Route_OccupancyRate[avg occupancy rate]=AVERAGE(Route_OccupancyRate[Occupancy])
+EVALUATE
+UNION
+(
+	TOPN
+	(
+		5,
+		FILTER(
+			SUMMARIZECOLUMNS
+			(
+			    'Date'[Year],
+				'Date'[Month],
+				Routes[Departure_Hub_EndName],
+				"avg occupancy rate", Route_OccupancyRate[avg occupancy rate]
+			),
+			'Date'[Year] = 2022 && 'Date'[Month] = 2
+		),
+		[avg occupancy rate],
+		DESC
+	),
+	TOPN
+	(
+		5,
+		FILTER(
+			SUMMARIZECOLUMNS
+			(
+			    'Date'[Year],
+				'Date'[Month],
+				Routes[Departure_Hub_EndName],
+				"avg occupancy rate", Route_OccupancyRate[avg occupancy rate]
+			),
+			'Date'[Year] = 2022 && 'Date'[Month] = 3
+		),
+		[avg occupancy rate],
+		DESC
+	)
+)
+
